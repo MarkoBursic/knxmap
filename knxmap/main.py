@@ -181,7 +181,8 @@ pmonitor.add_argument(
 def main():
     args = ARGS.parse_args()
     setup_logger(args.level)
-    loop = asyncio.get_event_loop()
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
 
     if hasattr(args, 'targets'):
         targets = Targets(args.targets, args.port)
@@ -245,7 +246,7 @@ def main():
                 ignore_auth=args.ignore_auth,
                 configuration_reads=args.configuration_reads))
     except KeyboardInterrupt:
-        for t in asyncio.Task.all_tasks():
+        for t in asyncio.all_tasks(loop):
             t.cancel()
         loop.run_forever()
 

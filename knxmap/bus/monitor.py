@@ -48,7 +48,7 @@ class KnxBusMonitor(KnxTunnelConnection):
                     self.tunnel_established = True
                 self.communication_channel = knx_message.communication_channel
             else:
-                if not self.group_monitor and knx_message.ERROR_CODE == 0x23:
+                if not self.group_monitor and knx_message.ERROR_CODE in (0x23, 0x29):
                     LOGGER.error('Device does not support BUSMONITOR, try --group-monitor instead')
                 else:
                     LOGGER.error('Connection setup error: {}'.format(knx_message.ERROR))
