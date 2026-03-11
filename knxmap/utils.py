@@ -53,7 +53,7 @@ def pack_knx_group_address(address):
 def parse_knx_device_serial(address):
     """Parse a KNX device serial to human readable format.
 
-    parse_knx_device_serial(b'\x00\x00\x00\x00\X12\x23')
+    parse_knx_device_serial(b'\x00\x00\x00\x00\x12\x23')
     '000000005C58'
     """
     assert isinstance(address, bytes), 'Address should be bytes, got %s instead' % type(address)
